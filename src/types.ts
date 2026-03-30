@@ -27,6 +27,12 @@ export interface BlockGroup {
   collapsed?: boolean;
 }
 
+export type GateItem =
+  | { kind: 'block'; block: Block }
+  | { kind: 'group'; group: BlockGroup };
+
+export type PhaseItem = GateItem;
+
 export interface Gate {
   id: string;
   name: string;
@@ -38,12 +44,27 @@ export interface Gate {
   decidedAt?: string;
   blockReason?: string;
   enforcement: 'hard' | 'soft';
+  items?: GateItem[];
 }
 
 export type JourneyItem =
   | { kind: 'block'; block: Block }
   | { kind: 'group'; group: BlockGroup }
   | { kind: 'gate'; gate: Gate };
+
+export interface Phase {
+  id: string;
+  name: string;
+  status: 'locked' | 'active' | 'completed';
+  items: PhaseItem[];
+  gate?: Gate;
+}
+
+export interface WorkArea {
+  id: string;
+  name: string;
+  items: PhaseItem[];
+}
 
 export interface Project {
   name: string;

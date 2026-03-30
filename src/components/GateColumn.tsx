@@ -184,8 +184,8 @@ export function GateColumn({ gate, status, isActive, onClick }: GateColumnProps)
 
       {/* Column body — blocks */}
       <div className="flex flex-col gap-3 p-3 min-h-[120px]">
-        {gate.items.length > 0 ? (
-          gate.items.map(renderItem)
+        {(gate.items ?? []).length > 0 ? (
+          (gate.items ?? []).map(renderItem)
         ) : (
           <div className={`flex-1 flex flex-col items-center justify-center gap-2 py-8 rounded-xl border-2 border-dashed ${
             isLocked ? 'border-grey-200' : 'border-grey-200 hover:border-primary-500/30 transition-colors'

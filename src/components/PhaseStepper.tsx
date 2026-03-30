@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { CheckCircle2, Circle, Lock, Plus, Edit3, Shield, Trash2 } from 'lucide-react';
+import { Plus, Edit3, Shield, Trash2 } from 'lucide-react';
 import type { Phase } from '../types';
 
 interface PhaseStepperProps {
@@ -109,7 +109,7 @@ export function PhaseStepper({ phases, activeGateId, onGateClick, onAddPhase, on
               )}
               {phase.gate && phase.gate.status === 'active' && (
                 <span className="text-[10px] font-semibold tabular-nums px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-700">
-                  {phase.gate.criteria.filter(c => c.completed).length}/{phase.gate.criteria.length}
+                  {phase.gate.criteria.filter((c: import('../types').GateCriterion) => c.completed).length}/{phase.gate.criteria.length}
                 </span>
               )}
             </button>

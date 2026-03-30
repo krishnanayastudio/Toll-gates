@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Sparkles, X, Send, ThumbsUp, ThumbsDown, AlertTriangle } from 'lucide-react';
+import { Sparkles, X, Send, ThumbsUp, AlertTriangle } from 'lucide-react';
 import type { Gate } from '../types';
 
 interface ClaudeAssistantProps {

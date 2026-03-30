@@ -4,7 +4,6 @@ import {
   MoreHorizontal, Trash2, Edit3, Shield, ChevronUp, Square, CheckCircle2,
 } from 'lucide-react';
 import type { Phase, Block, BlockGroup, PhaseItem } from '../types';
-import { GateIndicator } from './GateIndicator';
 
 interface PhaseCardProps {
   phase: Phase;
@@ -147,7 +146,7 @@ function ItemDot() {
 }
 
 /* ─── Empty phase block (when no items yet) ─── */
-function EmptyPhaseBlock({ phase, isLocked }: { phase: Phase; isLocked: boolean }) {
+function EmptyPhaseBlock({ isLocked }: { isLocked: boolean }) {
   return (
     <div className={`w-[288px] h-[230px] rounded-3xl border-2 border-dashed shrink-0 flex flex-col items-center justify-center gap-2 ${
       isLocked ? 'border-grey-200 bg-grey-050/50' : 'border-grey-200 bg-white hover:border-primary-500/30 hover:bg-primary-100/20 transition-all cursor-pointer'
@@ -255,7 +254,7 @@ function PhaseMenu({ phase, onDeletePhase, onRenamePhase, onAddGate, onRemoveGat
 }
 
 /* ─── Main export: renders a phase on the horizontal canvas ─── */
-export function PhaseCard({ phase, onGateClick, onDeletePhase, onRenamePhase, onAddGate, onRemoveGate }: PhaseCardProps) {
+export function PhaseCard({ phase, onDeletePhase, onRenamePhase, onAddGate, onRemoveGate }: PhaseCardProps) {
   const isLocked = phase.status === 'locked';
   const hasItems = phase.items.length > 0;
 
@@ -280,7 +279,7 @@ export function PhaseCard({ phase, onGateClick, onDeletePhase, onRenamePhase, on
       {/* Content: items laid out horizontally, or a single empty block */}
       {hasItems ? (
         <div className="flex items-start gap-2">
-          {phase.items.map((item, i) => (
+          {phase.items.map((item: PhaseItem, i: number) => (
             <div key={item.kind === 'block' ? item.block.id : item.group.id} className="flex items-center gap-2">
               {renderItem(item)}
               {i < phase.items.length - 1 && <ItemDot />}
@@ -288,7 +287,7 @@ export function PhaseCard({ phase, onGateClick, onDeletePhase, onRenamePhase, on
           ))}
         </div>
       ) : (
-        <EmptyPhaseBlock phase={phase} isLocked={isLocked} />
+        <EmptyPhaseBlock isLocked={isLocked} />
       )}
 
       {/* Gate indicator — sits below the phase's content */}

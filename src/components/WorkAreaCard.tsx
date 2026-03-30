@@ -251,7 +251,7 @@ export function WorkAreaCard({ workArea, status, onRename, onDelete }: WorkAreaC
 
       {hasItems ? (
         <div className="flex items-start gap-2">
-          {workArea.items.map((item, i) => (
+          {workArea.items.map((item: PhaseItem, i: number) => (
             <div key={item.kind === 'block' ? item.block.id : item.group.id} className="flex items-center gap-2">
               {renderItem(item)}
               {i < workArea.items.length - 1 && <ItemDot />}

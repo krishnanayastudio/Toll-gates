@@ -10,8 +10,6 @@ interface GateIndicatorProps {
 export function GateIndicator({ gate, compact = false, onClick }: GateIndicatorProps) {
   const completedCount = gate.criteria.filter(c => c.completed).length;
   const totalCount = gate.criteria.length;
-  const progress = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
-
   const statusConfig = {
     passed: {
       bg: 'bg-emerald-50',
